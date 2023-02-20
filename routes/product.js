@@ -1,6 +1,6 @@
 const express = require('express')
-require('../models/db.js')
 const Product = require('../models/Product.js')
+require('../models/db.js')
 
 
 
@@ -31,7 +31,12 @@ router.get('/:id', (req, res) => {
 
 router.post('/', (req, res) => {
     const { name, price, description } = req.body
-    const product = new Product(req.body)
+    const product = new Product({
+        name,
+        price,
+        description,
+        user: req.userId
+    })
     product.save()
         .then((product) => {
             res.json(product)
@@ -53,6 +58,7 @@ router.patch('/:id', (req, res) => {
         })
 })
 
+
 router.delete('/:id', (req, res) => {
     const { id } = req.params
     Product.findByIdAndDelete(id)
@@ -63,7 +69,6 @@ router.delete('/:id', (req, res) => {
             res.json(err)
         })
 })
-
 
 
 module.exports = router

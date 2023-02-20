@@ -2,6 +2,7 @@ const express = require('express')
 const User = require('../models/User.js')
 const Joi = require('joi')
 const bcrypt = require('bcryptjs')
+const jwt = require('jsonwebtoken')
 
 const router = express.Router()
 
@@ -35,7 +36,8 @@ router.post('/register', (req, res) => {
 
     user.save()
         .then((user) => {
-            res.json(user)
+            const token = jwt.sign({ _id: user._id }, process.env.JWT_SECRET_KEY)
+            res.header('Authorization', token).json({ accessToken: token })
         })
         .catch((err) => {
             res.json(err)
@@ -58,7 +60,8 @@ router.post('/login', (req, res) => {
             if (!isValid) {
                 return res.status(400).json('Invalid email or password!')
             }
-            res.json(user)
+            const token = jwt.sign({ _id: user._id }, process.env.JWT_SECRET_KEY)
+            res.header('Authorization', token).json({ accessToken: token })
         })
         .catch(() => {
             res.status(400).json('Invalid email or password!')

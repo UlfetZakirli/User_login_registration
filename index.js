@@ -5,6 +5,7 @@ require('dotenv').config()
 require('colors')
 const ProductRoutes = require('./routes/product.js')
 const UserRoutes = require('./routes/auth.js')
+const VerifyToken = require('./middleware/tokenVerify.js')
 
 
 const app = express()
@@ -14,7 +15,7 @@ app.use(bodyParser.urlencoded({ extended: true }))
 app.use(cors())
 
 app.use('/auth', UserRoutes)
-app.use('/api/products', ProductRoutes)
+app.use('/api/products', VerifyToken, ProductRoutes)
 
 
 const PORT = process.env.PORT || 5000
