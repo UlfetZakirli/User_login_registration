@@ -1,4 +1,3 @@
-# Login_Register
 
 ## Used Technologies
 * Node.js
