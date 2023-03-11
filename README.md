@@ -25,3 +25,8 @@ It's a layer built on the top of the Node js that helps manage servers and route
 ***Mongoose-unique-validator*** is a plugin which adds pre-save validation for unique fields within a Mongoose schema.
 
 ***Bcrypt.js*** is a library to help you hash passwords. Optimized bcrypt in plain JavaScript with zero dependencies.
+
+### Folder Structure
+
+<img width="685" alt="jwt" src="https://user-images.githubusercontent.com/88549805/224484954-2c81472c-dc4e-44dd-911c-d712cc93aeec.png">
+
